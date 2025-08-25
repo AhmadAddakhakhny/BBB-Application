@@ -1,8 +1,38 @@
-# WIP;
+# Beaglebone Black Application Development
+
+This is a professional platform for developing applications on BeagleBone Black, what you get is:
+* Custom beaglebone black SDK supports Qt6.
+* Configure U-Boot and support secure U-Boot
+* Deploy OP-TEE for key management
+* LEDController Software component to control whether user LEDs or External LEDs.
+* Porting DLTviewer Software component to enable debugging by using Logs.
+* Utilize Unit testing using gtest and gmock
+* Use of modern CMake for building and compiling
+* Code documentation with Doxygen
+* External libraries installed and managed by (CPM package manager)
+* Tooling: Clang-Format, Clang-format-diff, Cmake-format, Clang-tidy, Sanitizers
+
+## Clone
+```bash
+git@github.com:AhmadAddakhakhny/BBB-Application.git
+https://github.com/AhmadAddakhakhny/BBB-Application.git
+```
+
+## Software Requirements
+* CMake 3.21+
+* GNU Makefile
+* Doxygen
+* CPM
+* G++9 (or higher), Clang++9 (or higher)
+* Code Coverage (only on GNU|Clang): gcovr
+* Doxygen
+* clang-tidy
+* clang-format
+* python3
 
 ## Structures
 ```
-project/
+BBB-Application/
 ├── build/                 # Central build directory, holds project build configuration, development related scripts and binaries.
 │   └── out/               # Project compilation output.
 │   └── cmake/             # User defined cmake includes.
@@ -22,3 +52,4 @@ project/
 ├── .cmake-format.yaml     # cmake-format config file
 ├── .gitignore             # Execlude dir/files  from beaing tracked
 ```
+
