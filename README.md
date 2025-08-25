@@ -3,22 +3,22 @@
 ## Structures
 ```
 project/
-├── app/                   # Main program code
-├── build/                 # Out build files into out directore
-│   └── scripts/           # Scripts for setting project environment variables
-├── cmake/                 # User defined cmake includes
-├── configured/            # lookup of header file/s to be generated during compilation time.
-├── docs/                  # Support Doxygen Documentation
-├── external/              # Third party libs. source code
-├── lib/                   # Utility lib. for reusable modules that can be used across different parts of your project (i.e. string manipulation, math, file I/O)
-├── src/                   # Utility lib. for reusable modules that can be used across different parts of your project focused on how your application behaves (UDS, CAN)
-├── tests/                 # Unit test
+├── build/                 # Central build directory, holds project build configuration, development related scripts and binaries.
+│   └── out/               # Project compilation output.
+│   └── cmake/             # User defined cmake includes.
+│   └── scripts/           # Scripts for setting project environment.
+│   └── Makefile           # Build prject using Make rules.
+│   └── CMakeLists.txt     # Central project CMakeLists.txt file.
+├── src/                   # Central src directory where contain all applications and libs of the project (i.e. LEDController, CAN and libDlt).
+│   └── <apps>/               # application sources
+|   │   └── test/               # Unit test
+|   │   └── docs/               # Support Doxygen Documentation
+│   └── <lib*>/               # Utility lib. for reusable modules that can be used across different parts of your project whether first or third party lib.
+├── opt/                   # Custom Beaglebone black SDk sysroot for both ARM and x86 as supports Qt6, openssl and etc.
 ├── tools/                 # Development tools for development process i.e. linters, and formaters (i.e. LLVM clang flavours)
+├── LICENSE                # Project LICENSE
 ├── .clang-format          # Clang-format config file
 ├── .clang-tidy            # Clang-tidy config file
 ├── .cmake-format.yaml     # cmake-format config file
 ├── .gitignore             # Execlude dir/files  from beaing tracked
-├── CMakeLists.txt         # Central project CMakeLists.txt file
-├── LICENSE                # Project LICENSE
-├── Makefile               # Build prject using Make rules
 ```
