@@ -1,15 +1,4 @@
-# CppProjectTemplate
-
-
-This is a template for modern C++ projects. What you get is:
-* Application, third party libraries and test code separated in distinct folders.
-* Use of modern CMake for building and compiling
-* External libraries installed and managed by (CPM package manager)
-* Unit testing using gtest
-* General purpose libraries: JSON
-* Code documentation with Doxygen
-* Tooling: Clang-Format, Clang-format-diff, Cmake-format, Clang-tidy, Sanitizers
-
+# WIP;
 
 ## Structures
 ```
