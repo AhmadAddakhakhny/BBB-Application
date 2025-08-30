@@ -1,4 +1,4 @@
-build*
+builds*
 install*
 *html
 .vscode
