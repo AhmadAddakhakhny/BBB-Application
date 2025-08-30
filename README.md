@@ -30,25 +30,27 @@ https://github.com/AhmadAddakhakhny/BBB-Application.git
 * clang-format
 * python3
 
-## Structures
+## Project Layout
 ```
 BBB-Application/
-├── build/                 # Central build directory, holds project build configuration, development related scripts and binaries.
-│   └── out/               # Project compilation output.
-│   └── cmake/             # User defined cmake includes.
-│   └── scripts/           # Scripts for setting project environment.
-│   └── Makefile           # Build prject using Make rules.
-│   └── CMakeLists.txt     # Central project CMakeLists.txt file.
 ├── src/                   # Central src directory where contain all applications and libs of the project (i.e. LEDController, CAN and libDlt).
-│   └── <apps>/               # application sources
-|   │   └── test/               # Application unit-test
-│   └── <lib*>/               # Utility lib. for reusable modules that can be used across different parts of your project whether first or third party lib.
-├── opt/                   # Custom Beaglebone black SDk sysroot for both ARM and x86 as supports Qt6, openssl and etc.
-├── tools/                 # Development tools for development process i.e. linters, and formaters (i.e. LLVM clang flavours)
-├── LICENSE                # Project LICENSE
-├── .clang-format          # Clang-format config file
-├── .clang-tidy            # Clang-tidy config file
-├── .cmake-format.yaml     # cmake-format config file
-├── .gitignore             # Execlude dir/files  from beaing tracked
+    └── <apps>/               # application sources.
+        └── app/                # Application sources.
+        └── test/               # Application unit-test.
+        └── configured/         # lookup of header file/s to be generated during compilation time.
+        └── docs/               # Support Doxygen Documentation (ignored by git).
+    └── <lib*>/               # Utility lib. for reusable modules that can be used across different parts of your project whether first or third party lib.
+├── sdk/                   # Custom Beaglebone black SDk sysroot for both ARM and x86 as supports Qt6, openssl and etc.
+├── cmake/                 # User defined cmake includes.
+│   scripts/               # Scripts for setting project environment.
+├── tools/                 # Development tools for development process i.e. linters, and formaters (i.e. LLVM clang flavours).
+├── build/                 # OUT-OF-SOURCE build trees (ignored by git).
+├── install/               # Installed Project compilation output (ignored by git).
+├── CMakeLists.txt         # Central project CMakeLists.txt file.
+├── .gitignore             # Execlude dir/files  from beaing tracked.
+├── .clang-tidy            # Clang-tidy config file.
+├── .clang-format          # Clang-format config file.
+├── .cmake-format.yaml     # cmake-format config file.
+├── LICENSE                # Project LICENSE.
 ```
 
