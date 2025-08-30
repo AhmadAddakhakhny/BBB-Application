@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+
+  "configurePresets": [
+    {
+      "name": "host",
+      "displayName": "Host x86_64 Debug",
+      "description": "Build for host with Debug flags",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/builds/x86-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "arm",
+      "displayName": "ARMv7 Release (BeagleBone)",
+      "description": "Cross-compile for ARM using toolchain file",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/builds/arm-release",
+      "toolchainFile": "cmake/toolchains/beaglebone-armv7.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/arm-release"
+      }
+    }
+  ],
+
+  "buildPresets": [
+    {
+      "name": "host",
+      "configurePreset": "host"
+    },
+    {
+      "name": "arm",
+      "configurePreset": "arm"
+    }
+  ]
+}
