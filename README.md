@@ -1,6 +1,6 @@
 # Beaglebone Black Application Development
 ![Image](https://github.com/user-attachments/assets/2b35cdc0-944a-430f-bb16-1d9e4b85039c)
-This is a professional platform for developing applications on BeagleBone Black, what you get is:
+This is a Qt/C++ CMake-based platform for developing applications on the BeagleBone Black. What you get is:
 * Custom beaglebone black SDK supports Qt6
 * Configure U-Boot and support secure U-Boot
 * Deploy OP-TEE for key management
