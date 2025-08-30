@@ -47,6 +47,7 @@ BBB-Application/
 ├── build/                 # OUT-OF-SOURCE build trees (ignored by git).
 ├── install/               # Installed Project compilation output (ignored by git).
 ├── CMakeLists.txt         # Central project CMakeLists.txt file.
+├── CMakePresets.json      # Defines reusable build configurations (presets) so you can build and cross-compile the project with simple cmake --preset <name> commands
 ├── .gitignore             # Execlude dir/files  from beaing tracked.
 ├── .clang-tidy            # Clang-tidy config file.
 ├── .clang-format          # Clang-format config file.
