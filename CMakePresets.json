@@ -8,8 +8,8 @@
 
   "configurePresets": [
     {
-      "name": "host",
-      "displayName": "Host x86_64 Debug",
+      "name": "x86-linux-gcc-debug",
+      "displayName": "x86_64 Debug (Native Linux Machine)",
       "description": "Build for host with Debug flags",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/builds/x86-debug",
@@ -18,8 +18,8 @@
       }
     },
     {
-      "name": "arm",
-      "displayName": "ARMv7 Release (BeagleBone)",
+      "name": "arm-linux-gcc-release",
+      "displayName": "ARMv7 Release (BeagleBone Black)",
       "description": "Cross-compile for ARM using toolchain file",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/builds/arm-release",
@@ -33,12 +33,12 @@
 
   "buildPresets": [
     {
-      "name": "host",
-      "configurePreset": "host"
+      "name": "x86-linux-gcc-debug",
+      "configurePreset": "x86-linux-gcc-debug"
     },
     {
-      "name": "arm",
-      "configurePreset": "arm"
+      "name": "arm-linux-gcc-release",
+      "configurePreset": "arm-linux-gcc-release"
     }
   ]
 }
