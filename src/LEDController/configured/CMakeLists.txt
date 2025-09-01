@@ -1,3 +1,3 @@
 configure_file(
-    "config.hpp.in" "${CMAKE_BINARY_DIR}/configured_files/include/config.hpp"
+    "config.hpp.in" "${CMAKE_BINARY_DIR}/configured_files/include/LEDControllerConfig.hpp"
     ESCAPE_QUOTES)
