@@ -44,7 +44,7 @@ BBB-Application/
 ├── cmake/                 # User defined cmake includes.
 │   scripts/               # Scripts for setting project environment.
 ├── tools/                 # Development tools for development process i.e. linters, and formaters (i.e. LLVM clang flavours).
-├── build/                 # OUT-OF-SOURCE build trees (ignored by git).
+├── builds/                 # OUT-OF-SOURCE build trees (ignored by git).
 ├── install/               # Installed Project compilation output (ignored by git).
 ├── CMakeLists.txt         # Central project CMakeLists.txt file.
 ├── CMakePresets.json      # Defines reusable build configurations (presets) so you can build and cross-compile the project with simple cmake --preset <name> commands
