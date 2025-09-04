@@ -44,12 +44,12 @@ BBB-Application/
 ├── cmake/                 # User defined cmake includes.
 │   scripts/               # Scripts for setting project environment.
 ├── tools/                 # Development tools for development process i.e. linters, and formaters (i.e. LLVM clang flavours).
+    └── conanfile.py          # Contains all packages that have to be installed and be consumed by this project via conan package manager.
 ├── builds/                # OUT-OF-SOURCE build trees (ignored by git).
 ├── install/               # Installed Project compilation output (ignored by git).
 ├── CMakeLists.txt         # Central project CMakeLists.txt file.
 ├── CMakePresets.json      # Defines reusable build configurations (presets) so you can build and cross-compile the project with simple cmake --preset <name> commands
 ├── Makefile               # Wrapper rules for CMakePresets.
-├── conanfile.py           # Contains all packages that have to be installed and be consumed by this project via conan package manager.
 ├── .gitignore             # Execlude dir/files  from beaing tracked.
 ├── .clang-tidy            # Clang-tidy config file.
 ├── .clang-format          # Clang-format config file.
