@@ -13,7 +13,7 @@ arm:
 
 prep_host_dep:
 	mkdir -p builds/x86-debug/external
-	cd builds/x86-debug/external && conan install ../../../ -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
+	cd builds/x86-debug/external && conan install ../../../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
 
 help:
 	@echo "Available targets are:"
