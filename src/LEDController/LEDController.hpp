@@ -1,7 +1,7 @@
 #ifndef LEDCONTROLLER_HPP
 #define LEDCONTROLLER_HPP
 #include <iostream>
-#include "include/LEDControllerConfig.hpp"
+#include "LEDControllerConfig.hpp"
 
 class LEDController {
 public:

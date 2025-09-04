@@ -9,5 +9,5 @@ add_subdirectory(configured)
 add_executable(LEDController ${APP_SOURCES})
     
 target_include_directories(LEDController PRIVATE
-    "${CMAKE_BINARY_DIR}/configured_files/nclude")
+    "${CMAKE_BINARY_DIR}/configured_files/include")
 
