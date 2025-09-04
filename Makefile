@@ -1,8 +1,8 @@
 .PHONY: host arm help clean
 
-all:host
+all: host
 
-host:prep_host_dep
+host:
 	cmake --preset x86-linux-gcc-debug
 	cmake --build --preset x86-linux-gcc-debug -j
 	./builds/x86-debug/src/LEDController/LEDController
@@ -11,9 +11,12 @@ arm:
 	cmake --preset arm-linux-gcc-release
 	cmake --build --preset arm-linux-gcc-release -j
 
-prep_host_dep:
-	mkdir -p builds/x86-debug/external
-	cd builds/x86-debug/external && conan install ../../../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
+test:
+	mkdir -p builds/x86-tests/external
+	cd builds/x86-tests/external && conan install ../../../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
+	cmake --preset x86-linux-gcc-tests
+	cmake --build --preset x86-linux-gcc-tests -j
+	ctest --preset=x86-linux-gcc-tests
 
 help:
 	@echo "Available targets are:"

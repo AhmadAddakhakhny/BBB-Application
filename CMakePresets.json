@@ -15,7 +15,16 @@
       "binaryDir": "${sourceDir}/builds/x86-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "HOST_BUILD": "ON"
+        "BUILD_TESTING": "OFF"
+      }
+    },
+    {
+      "name": "x86-linux-gcc-tests",
+      "displayName": "x86_64 Debug (Tests)",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86-tests",
+      "cacheVariables": {
+        "BUILD_TESTING": "ON"
       }
     },
     {
@@ -38,8 +47,25 @@
       "configurePreset": "x86-linux-gcc-debug"
     },
     {
+      "name": "x86-linux-gcc-tests",
+      "configurePreset": "x86-linux-gcc-tests"
+    },
+    {
       "name": "arm-linux-gcc-release",
       "configurePreset": "arm-linux-gcc-release"
+    }
+  ],
+
+   "testPresets": [
+    {
+      "name": "x86-linux-gcc-tests",
+      "description": "Run GoogleTest-based tests via CTest on the native host",
+      "configurePreset": "x86-linux-gcc-tests",
+      "output": {
+        "shortProgress": true,
+        "outputOnFailure": true,
+        "verbosity": "default"
+      }
     }
   ]
 }
