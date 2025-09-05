@@ -1,8 +1,9 @@
 # it is a good practice to check the support of LTO of your compiler
 # and the following function does so.
 
-function(target_enable_lto TARGET ENABLE)
-    if(NOT ENABLE)
+function(target_enable_lto TARGET)
+    if(NOT LTO_ENABLED)
+        message(STATUS "IPO/LTO is disabled!")
         return()
     endif()
 

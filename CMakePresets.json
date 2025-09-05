@@ -15,7 +15,8 @@
       "binaryDir": "${sourceDir}/builds/x86-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "WARNINGS_DISABLED": "OFF"
+        "WARNINGS_DISABLED": "OFF",
+        "LTO_ENABLED": "ON"
       }
     },
     {
@@ -26,7 +27,8 @@
       "cacheVariables": {
         "BUILD_TESTING": "ON",
         "ADDRESS_SANITIZER_ENABLED": "ON",
-        "WARNINGS_DISABLED": "OFF"
+        "WARNINGS_DISABLED": "OFF",
+        "LTO_ENABLED": "ON"
       }
     },
     {
@@ -39,7 +41,8 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/arm-release",
-        "WARNINGS_DISABLED": "OFF"
+        "WARNINGS_DISABLED": "OFF",
+        "LTO_ENABLED": "ON"
       }
     }
   ],

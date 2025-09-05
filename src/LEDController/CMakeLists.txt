@@ -13,3 +13,6 @@ target_include_directories(LEDController PRIVATE
 
 include(warnings)
 target_set_warnings(LEDController)
+
+include(LTO)
+target_enable_lto(LEDController)

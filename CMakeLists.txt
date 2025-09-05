@@ -9,10 +9,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+
 option(WARNINGS_DISABLED OFF "Disable Compiler Warnings")
 option(BUILD_TESTING OFF "Build unit tests")
 option(ADDRESS_SANITIZER_ENABLED OFF "Build with sanitizer")
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+option(LTO_ENABLED ON "Enable LTO support")
 
 include(components)     # include all of project SW components
 
