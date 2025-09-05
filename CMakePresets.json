@@ -15,7 +15,7 @@
       "binaryDir": "${sourceDir}/builds/x86-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_TESTING": "OFF"
+        "WARNINGS_DISABLED": "OFF"
       }
     },
     {
@@ -24,7 +24,9 @@
       "inherits": "x86-linux-gcc-debug",
       "binaryDir": "${sourceDir}/builds/x86-tests",
       "cacheVariables": {
-        "BUILD_TESTING": "ON"
+        "BUILD_TESTING": "ON",
+        "ADDRESS_SANITIZER_ENABLED": "ON",
+        "WARNINGS_DISABLED": "OFF"
       }
     },
     {
@@ -36,7 +38,8 @@
       "toolchainFile": "cmake/toolchains/beaglebone-armv7.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/arm-release"
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/arm-release",
+        "WARNINGS_DISABLED": "OFF"
       }
     }
   ],

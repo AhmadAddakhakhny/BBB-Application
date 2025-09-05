@@ -9,10 +9,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+option(WARNINGS_DISABLED OFF "Disable Compiler Warnings")
 option(BUILD_TESTING OFF "Build unit tests")
+option(ADDRESS_SANITIZER_ENABLED OFF "Build with sanitizer")
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
 include(components)     # include all of project SW components
+
+# Build project with Address sanitizer symbols
+if(ADDRESS_SANITIZER_ENABLED)
+    message(STATUS "Address sanitizer activated")
+    include(sanitizer)
+    add_sanitizer_flags()
+endif()
 
 # Build project applications
 foreach(sw_component ${COMPONENTS})

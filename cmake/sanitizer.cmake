@@ -6,12 +6,10 @@ function(add_sanitizer_flags)
     add_compile_options("-fno-omit-frame-pointer") # Improves stack traces.
     add_link_options("-fno-omit-frame-pointer")
 
-    add_compile_options("-fsanitize=address"
-    )# Detect out-of-bounds and use-after-free bugs.
+    add_compile_options("-fsanitize=address") # Detect out-of-bounds and use-after-free bugs.
     add_link_options("-fsanitize=address")
 
-    add_compile_options("-fsanitize=undefined"
-    )#  a fast undefined behavior detector.
+    add_compile_options("-fsanitize=undefined") # a fast undefined behavior detector.
     add_link_options("-fsanitize=undefined")
 
 endfunction()

@@ -11,3 +11,5 @@ add_executable(LEDController ${APP_SOURCES})
 target_include_directories(LEDController PRIVATE
     "${CMAKE_BINARY_DIR}/configured_files/include")
 
+include(warnings)
+target_set_warnings(LEDController)

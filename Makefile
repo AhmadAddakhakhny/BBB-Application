@@ -1,4 +1,4 @@
-.PHONY: host arm help clean
+.PHONY: host arm test help clean
 
 all: host
 
