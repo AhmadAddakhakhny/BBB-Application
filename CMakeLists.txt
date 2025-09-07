@@ -30,8 +30,14 @@ if (ADDRESS_SANITIZER_ENABLED)
 endif ()
 
 if (FORMAT_ENABLED)
-    add_cmake_format_target () # format prject cmake scripts
-    add_clang_format_target () # format project sources
+    # format prject cmake scripts
+    add_cmake_format_target ()
+
+    # format tracked files only operates with git repos
+    add_clang_format_diff_target ()
+
+    # format all project sources - AGGRESSIVE!!!
+    # add_clang_format_target ()
 endif ()
 
 # Build project applications
