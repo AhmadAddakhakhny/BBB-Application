@@ -24,8 +24,7 @@ function(add_clang_tidy_to_target target)
                 CONFIG_FILE=${CMAKE_SOURCE_DIR}/.clang-tidy
                 -extra-arg-before=-std=${CMAKE_CXX_STANDARD}
                 # HEADER_FILTER=(src|app)/.*\\.(h|hpp)
-                -header-filter=' (src) /.*\\. (h|hpp) '
-                -p=${CMAKE_BINARY_DIR}
+                -header-filter=' (src) /.*\\. (h|hpp) ' -p=${CMAKE_BINARY_DIR}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             USES_TERMINAL)
         message(STATUS "CMAKE_BINARY_DIR:  ${CMAKE_BINARY_DIR}")
@@ -103,14 +102,14 @@ function(add_clang_format_diff_target)
     endif()
 endfunction()
 
-function(add_cmake_format_target)
+function(add_cmake_format_target target)
     # Check if cmake-format is enabled
     if(NOT ${ENABLE_CMAKE_FORMAT})
         return()
     endif()
 
     # Define the root CMake file
-    set(ROOT_CMAKE_FILES "${CMAKE_SOURCE_DIR}/CMakeLists.txt")
+    set(ROOT_CMAKE_FILES "${CMAKE_SOURCE_DIR}/src/${target}/CMakeLists.txt")
 
     # Gather all CMakeLists.txt files and .cmake files
     file(GLOB_RECURSE CMAKE_FILES_TXT "*/CMakeLists.txt")

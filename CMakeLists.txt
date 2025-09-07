@@ -19,6 +19,7 @@ option(CLANG_TIDY_ENABLED OFF "Enable clang-tidy support")
 
 include(components)     # include all of project SW components
 include(tools)  # clang-tidy, clang-format and cmake-format
+include(execBashCommand)
 
 # Build project with Address sanitizer symbols
 if(ADDRESS_SANITIZER_ENABLED)
@@ -29,6 +30,7 @@ endif()
 
 # Build project applications
 foreach(sw_component ${COMPONENTS})
+    add_cmake_format_target(${sw_component})   # format sw_component sources
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/${sw_component})
 endforeach()
 
