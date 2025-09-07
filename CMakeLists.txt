@@ -15,8 +15,10 @@ option(WARNINGS_DISABLED OFF "Disable Compiler Warnings")
 option(BUILD_TESTING OFF "Build unit tests")
 option(ADDRESS_SANITIZER_ENABLED OFF "Build with sanitizer")
 option(LTO_ENABLED ON "Enable LTO support")
+option(CLANG_TIDY_ENABLED OFF "Enable clang-tidy support")
 
 include(components)     # include all of project SW components
+include(tools)  # clang-tidy, clang-format and cmake-format
 
 # Build project with Address sanitizer symbols
 if(ADDRESS_SANITIZER_ENABLED)

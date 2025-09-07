@@ -44,6 +44,15 @@
         "WARNINGS_DISABLED": "OFF",
         "LTO_ENABLED": "ON"
       }
+    },
+    {
+      "name": "x86-linux-gcc-debug-nolto",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86-debug-nolto",
+      "cacheVariables": {
+        "LTO_ENABLED": "OFF",
+        "CLANG_TIDY_ENABLED": "ON"
+      }
     }
   ],
 
@@ -59,6 +68,13 @@
     {
       "name": "arm-linux-gcc-release",
       "configurePreset": "arm-linux-gcc-release"
+    },
+    {
+      "name": "lint",
+      "displayName": "Run clang-tidy (no LTO)",
+      "configurePreset": "x86-linux-gcc-debug-nolto",
+      "targets": ["LEDController_clangtidy"],
+      "jobs": 4
     }
   ],
 

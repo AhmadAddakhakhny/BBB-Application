@@ -1,4 +1,4 @@
-.PHONY: host arm test help clean
+.PHONY: host arm test lint help clean
 
 all: host
 
@@ -17,6 +17,11 @@ test:
 	cmake --preset x86-linux-gcc-tests
 	cmake --build --preset x86-linux-gcc-tests -j
 	ctest --preset=x86-linux-gcc-tests
+
+lint:
+	cmake --preset x86-linux-gcc-debug-nolto
+	cmake --build --preset lint
+	@echo "################## Lintting Done."
 
 help:
 	@echo "Available targets are:"

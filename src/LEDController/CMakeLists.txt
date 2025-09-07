@@ -11,8 +11,13 @@ add_executable(LEDController ${APP_SOURCES})
 target_include_directories(LEDController PRIVATE
     "${CMAKE_BINARY_DIR}/configured_files/include")
 
-include(warnings)
-target_set_warnings(LEDController)
-
-include(LTO)
-target_enable_lto(LEDController)
+    
+if (${CLANG_TIDY_ENABLED})
+    add_clang_tidy_to_target(LEDController)
+else()
+    include(warnings)
+    target_set_warnings(LEDController)
+    
+    include(LTO)
+    target_enable_lto(LEDController)
+endif()
