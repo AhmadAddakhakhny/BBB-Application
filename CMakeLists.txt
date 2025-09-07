@@ -53,6 +53,10 @@ if (BUILD_TESTING)
     find_package (GTest REQUIRED)
     include (CTest)
 
+    # 2. setup code coverage
+    include(codeCoverage)
+    append_coverage_compiler_flags()
+
     # 2. Build unit tests
     foreach (sw_component ${COMPONENTS})
         add_subdirectory (${CMAKE_SOURCE_DIR}/src/${sw_component}/tests)
