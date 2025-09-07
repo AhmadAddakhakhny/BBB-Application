@@ -12,7 +12,7 @@
       "displayName": "x86_64 Debug (Native Linux Machine)",
       "description": "Build for host with Debug flags",
       "generator": "Unix Makefiles",
-      "binaryDir": "${sourceDir}/builds/x86-debug",
+      "binaryDir": "${sourceDir}/builds/x86/debug/",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "WARNINGS_DISABLED": "OFF",
@@ -20,10 +20,31 @@
       }
     },
     {
-      "name": "x86-linux-gcc-tests",
-      "displayName": "x86_64 Debug (Tests)",
+      "name": "x86-linux-gcc-debug-nolto",
+      "displayName": "x86_64 Debug-nolto (Native Linux Machine)",
+      "description": "Build for host with Debug flags",
       "inherits": "x86-linux-gcc-debug",
-      "binaryDir": "${sourceDir}/builds/x86-tests",
+      "binaryDir": "${sourceDir}/builds/x86/debug-lint",
+      "cacheVariables": {
+        "LTO_ENABLED": "OFF",
+        "CLANG_TIDY_ENABLED": "ON"
+      }
+    },
+      {
+      "name": "x86-linux-gcc-debug-format",
+      "displayName": "x86_64 Debug-format (Native Linux Machine)",
+      "description": "Build for host with Debug flags",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86/debug-format",
+      "cacheVariables": {
+        "FORMAT_ENABLED": "ON"
+      }
+    },
+    {
+      "name": "x86-linux-gcc-tests",
+      "displayName": "x86_64 Debug-test (Native Linux Machine)",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86/debug-tests",
       "cacheVariables": {
         "BUILD_TESTING": "ON",
         "ADDRESS_SANITIZER_ENABLED": "ON",
@@ -44,15 +65,6 @@
         "WARNINGS_DISABLED": "OFF",
         "LTO_ENABLED": "ON"
       }
-    },
-    {
-      "name": "x86-linux-gcc-debug-nolto",
-      "inherits": "x86-linux-gcc-debug",
-      "binaryDir": "${sourceDir}/builds/x86-debug-nolto",
-      "cacheVariables": {
-        "LTO_ENABLED": "OFF",
-        "CLANG_TIDY_ENABLED": "ON"
-      }
     }
   ],
 
@@ -62,19 +74,25 @@
       "configurePreset": "x86-linux-gcc-debug"
     },
     {
+      "name": "x86-linux-gcc-debug-lint",
+      "displayName": "Run clang-tidy (no LTO)",
+      "configurePreset": "x86-linux-gcc-debug-nolto",
+      "targets": ["LEDController_clangtidy"],
+      "jobs": 4
+    },
+    {
+      "name": "x86-linux-gcc-debug-format",
+      "displayName": "Run clang-format & cmake-format",
+      "configurePreset": "x86-linux-gcc-debug-format",
+      "jobs": 4
+    },
+    {
       "name": "x86-linux-gcc-tests",
       "configurePreset": "x86-linux-gcc-tests"
     },
     {
       "name": "arm-linux-gcc-release",
       "configurePreset": "arm-linux-gcc-release"
-    },
-    {
-      "name": "lint",
-      "displayName": "Run clang-tidy (no LTO)",
-      "configurePreset": "x86-linux-gcc-debug-nolto",
-      "targets": ["LEDController_clangtidy"],
-      "jobs": 4
     }
   ],
 

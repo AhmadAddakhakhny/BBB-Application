@@ -5,23 +5,31 @@ all: host
 host:
 	cmake --preset x86-linux-gcc-debug
 	cmake --build --preset x86-linux-gcc-debug -j
-	./builds/x86-debug/src/LEDController/LEDController
+	./builds/x86/debug/src/LEDController/LEDController
+	@echo "################## Build for host-debug Done."
 
 arm:
 	cmake --preset arm-linux-gcc-release
 	cmake --build --preset arm-linux-gcc-release -j
+	@echo "################## Build for target-release Done."
 
 test:
-	mkdir -p builds/x86-tests/external
-	cd builds/x86-tests/external && conan install ../../../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
+	mkdir -p builds/x86/debug-tests/external
+	cd builds/x86/debug-tests/external && conan install ../../../../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
 	cmake --preset x86-linux-gcc-tests
 	cmake --build --preset x86-linux-gcc-tests -j
 	ctest --preset=x86-linux-gcc-tests
+	@echo "################## Unit test Done."
 
 lint:
 	cmake --preset x86-linux-gcc-debug-nolto
-	cmake --build --preset lint
-	@echo "################## Lintting Done."
+	cmake --build --preset x86-linux-gcc-debug-lint
+	@echo "################## Linting Done."
+
+fmt:
+	cmake --preset x86-linux-gcc-debug-format
+	cmake --build --preset x86-linux-gcc-debug-format
+	@echo "################## formating Done."
 
 help:
 	@echo "Available targets are:"
