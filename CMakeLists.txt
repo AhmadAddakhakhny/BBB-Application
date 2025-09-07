@@ -16,6 +16,7 @@ option(BUILD_TESTING OFF "Build unit tests")
 option(ADDRESS_SANITIZER_ENABLED OFF "Build with sanitizer")
 option(LTO_ENABLED ON "Enable LTO support")
 option(CLANG_TIDY_ENABLED OFF "Enable clang-tidy support")
+option(FORMAT_ENABLED OFF "Format project sources and scripts")
 
 include(components)     # include all of project SW components
 include(tools)  # clang-tidy, clang-format and cmake-format
@@ -28,9 +29,13 @@ if(ADDRESS_SANITIZER_ENABLED)
     add_sanitizer_flags()
 endif()
 
+if (FORMAT_ENABLED)
+add_cmake_format_target () # format prject cmake scripts
+add_clang_format_target () # format project sources
+endif()
+
 # Build project applications
 foreach(sw_component ${COMPONENTS})
-    add_cmake_format_target(${sw_component})   # format sw_component sources
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/${sw_component})
 endforeach()
 
