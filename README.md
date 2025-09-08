@@ -19,7 +19,7 @@ https://github.com/AhmadAddakhakhny/BBB-Application.git
 ```
 
 ## Software Requirements
-* python3
+* Python3
 * GNU Makefile
 * CMake 3.21+
 * clang-tidy
