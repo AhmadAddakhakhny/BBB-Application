@@ -2,14 +2,9 @@
 ![Image](https://github.com/user-attachments/assets/2b35cdc0-944a-430f-bb16-1d9e4b85039c)
 This is a Qt/C++ CMake-based platform for developing applications on the BeagleBone Black. What you get is:
 * Custom beaglebone black SDK supports Qt6
-* Configure U-Boot and support secure U-Boot
-* Deploy OP-TEE for key management
-* LEDController Software component to control whether user LEDs or External LEDs
-* Porting DLTviewer Software component to enable debugging by using Logs
 * Utilize Unit testing using gtest and gmock
 * Use of modern CMake for building and compiling
-* Code documentation with Doxygen
-* External libraries installed and managed by (CPM package manager)
+* External libraries installed and managed by Conan
 * Tooling: Clang-Format, Clang-format-diff, Cmake-format, Clang-tidy, Sanitizers
 
 ## Clone
@@ -19,16 +14,13 @@ https://github.com/AhmadAddakhakhny/BBB-Application.git
 ```
 
 ## Software Requirements
-* CMake 3.21+
+* Python3
 * GNU Makefile
-* Doxygen
-* CPM
-* G++9 (or higher), Clang++9 (or higher)
-* Code Coverage (only on GNU|Clang): gcovr
-* Doxygen
+* CMake 3.21+
 * clang-tidy
 * clang-format
-* python3
+* G++9 (or higher), Clang++9 (or higher)
+* Code Coverage (only on GNU|Clang): gcovr
 
 ## Project Layout
 ```
@@ -38,7 +30,7 @@ BBB-Application/
         └── app/                # Application sources.
         └── test/               # Application unit-test.
         └── configured/         # lookup of header file/s to be generated during compilation time.
-        └── docs/               # Support Doxygen Documentation (ignored by git).
+        └── docs/               # Unit document design AKA. UDD
     └── <lib*>/               # Utility lib. for reusable modules that can be used across different parts of your project whether first or third party lib.
 ├── sdk/                   # Custom Beaglebone black SDk sysroot for both ARM and x86 as supports Qt6, openssl and etc.
 ├── cmake/                 # User defined cmake includes.
@@ -47,6 +39,7 @@ BBB-Application/
     └── conanfile.py          # Contains all packages that have to be installed and be consumed by this project via conan package manager.
 ├── builds/                # OUT-OF-SOURCE build trees (ignored by git).
 ├── install/               # Installed Project compilation output (ignored by git).
+├── docs/                  # Architecture document design AKA ADD
 ├── CMakeLists.txt         # Central project CMakeLists.txt file.
 ├── CMakePresets.json      # Defines reusable build configurations (presets) so you can build and cross-compile the project with simple cmake --preset <name> commands
 ├── Makefile               # Wrapper rules for CMakePresets.
