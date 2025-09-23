@@ -54,8 +54,8 @@ if (BUILD_TESTING)
     include (CTest)
 
     # 2. setup code coverage
-    include(codeCoverage)
-    append_coverage_compiler_flags()
+    include (codeCoverage)
+    append_coverage_compiler_flags ()
 
     # 2. Build unit tests
     foreach (sw_component ${COMPONENTS})

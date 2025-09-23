@@ -8,9 +8,9 @@ include (GoogleTest)
 enable_testing ()
 gtest_discover_tests (${APP_TEST} DISCOVERY_MODE PRE_TEST)
 
-
-set(COVERAGE_MAIN "coverage")
-set(COVERAGE_EXCLUDES
+set (COVERAGE_MAIN "coverage")
+set (
+    COVERAGE_EXCLUDES
     "${PROJECT_SOURCE_DIR}/builds/*"
     "${PROJECT_SOURCE_DIR}/cmake/*"
     "${PROJECT_SOURCE_DIR}/docs/*"
@@ -18,14 +18,13 @@ set(COVERAGE_EXCLUDES
     "${PROJECT_SOURCE_DIR}/sdl/*"
     "${PROJECT_SOURCE_DIR}/tools/*"
     "/usr/include/*")
-# set(COVERAGE_EXTRA_FLAGS)
-set(COVERAGE_DEPENDENCIES ${APP_TEST})
+set (COVERAGE_DEPENDENCIES ${APP_TEST})
 
-setup_target_for_coverage_gcovr_html(
+setup_target_for_coverage_gcovr_html (
     NAME
     ${COVERAGE_MAIN}
     EXECUTABLE
-    ${PROJECT_BINARY_DIR}/src/LEDController/tests/${APP_TEST}
+    ctest
     DEPENDENCIES
     ${COVERAGE_DEPENDENCIES}
     BASE_DIRECTORY

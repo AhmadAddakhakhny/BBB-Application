@@ -29,20 +29,9 @@
 
 include (CMakeParseArguments)
 
-if (CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES
-                                           "Clang")
-    set (IS_CLANG TRUE)
-else ()
-    set (IS_CLANG FALSE)
-endif ()
-if (CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    set (IS_GCC TRUE)
-else ()
-    set (IS_GCC FALSE)
-endif ()
-
-if (NOT ${IS_CLANG} AND NOT ${IS_GCC})
-    message (FATAL_ERROR "Compiler is not gcc/clang! Aborting...")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    string(REGEX MATCH "^[0-9]+" GCC_MAJOR "${CMAKE_CXX_COMPILER_VERSION}")
+  find_program(GCOV_EXEC NAMES gcov-${GCC_MAJOR} gcov)
 endif ()
 
 find_program (GCOVR_PATH gcovr)
@@ -143,6 +132,7 @@ function (setup_target_for_coverage_gcovr_html)
     set (
         GCOVR_HTML_CMD
         ${GCOVR_PATH}
+        --gcov-executable "${GCOV_EXEC}"
         ${GCOVR_EXTRA_FLAGS}
         --html
         ${Coverage_NAME}/index.html

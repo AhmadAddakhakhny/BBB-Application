@@ -17,7 +17,7 @@ test:
 	mkdir -p builds/x86/debug-tests/external
 	cd builds/x86/debug-tests/external && conan install ../../../../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
 	cmake --preset x86-linux-gcc-tests
-	cmake --build --preset x86-linux-gcc-tests -j
+	cmake --build --preset x86-linux-gcc-tests -j --target coverage
 	ctest --preset=x86-linux-gcc-tests
 	@echo "################## Unit test Done."
 

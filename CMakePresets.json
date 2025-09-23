@@ -49,7 +49,7 @@
         "BUILD_TESTING": "ON",
         "ADDRESS_SANITIZER_ENABLED": "ON",
         "WARNINGS_DISABLED": "OFF",
-        "LTO_ENABLED": "ON"
+        "LTO_ENABLED": "OFF"
       }
     },
     {
