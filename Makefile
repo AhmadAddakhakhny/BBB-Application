@@ -1,4 +1,4 @@
-.PHONY: host arm test lint help clean
+.PHONY: host arm test lint fmt help clean
 
 all: host
 
@@ -35,6 +35,9 @@ help:
 	@echo "Available targets are:"
 	@echo "make host  - x86-linux-gcc-debug"
 	@echo "make arm   - arm-linux-gcc-release"
+	@echo "make test  - x86-linux-gcc-debug & run project unit test"
+	@echo "make lint  - x86-linux-gcc-debug & run clang tidy"
+	@echo "make fmt   - format project sources"
 	@echo "make clean - remove all builds/install dirs"
 
 clean:
