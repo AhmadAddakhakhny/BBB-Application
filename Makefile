@@ -6,12 +6,12 @@ host:
 	cmake --preset x86-linux-gcc-debug
 	cmake --build --preset x86-linux-gcc-debug -j
 	./builds/x86/debug/src/LEDController/LEDController
-	@echo "################## Build for host-debug Done."
+	@echo "##### Build for host-debug Done."
 
 arm:
 	cmake --preset arm-linux-gcc-release
 	cmake --build --preset arm-linux-gcc-release -j
-	@echo "################## Build for target-release Done."
+	@echo "##### Build for target-release Done."
 
 test:
 	mkdir -p builds/x86/debug-tests/external
@@ -19,17 +19,17 @@ test:
 	cmake --preset x86-linux-gcc-tests
 	cmake --build --preset x86-linux-gcc-tests -j --target coverage
 	ctest --preset=x86-linux-gcc-tests
-	@echo "################## Unit test Done."
+	@echo "##### Unit test Done."
 
 lint:
 	cmake --preset x86-linux-gcc-debug-nolto
 	cmake --build --preset x86-linux-gcc-debug-lint
-	@echo "################## Linting Done."
+	@echo "##### Linting Done."
 
 fmt:
 	cmake --preset x86-linux-gcc-debug-format
 	cmake --build --preset x86-linux-gcc-debug-format
-	@echo "################## formating Done."
+	@echo "##### formating Done."
 
 help:
 	@echo "Available targets are:"
@@ -39,6 +39,7 @@ help:
 	@echo "make lint  - x86-linux-gcc-debug & run clang tidy"
 	@echo "make fmt   - format project sources"
 	@echo "make clean - remove all builds/install dirs"
+	@echo "#### help Done."
 
 clean:
 	rm -rf builds install
