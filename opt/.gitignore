@@ -1,5 +1,4 @@
 # Ignore all generated SDK files
-# sysroots
 *
 
 # Keep these scripts and this file
