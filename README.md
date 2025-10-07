@@ -32,7 +32,7 @@ BBB-Application/
         └── configured/         # lookup of header file/s to be generated during compilation time.
         └── docs/               # Unit document design AKA. UDD
     └── <lib*>/               # Utility lib. for reusable modules that can be used across different parts of your project whether first or third party lib.
-├── opt/                   # Custom Beaglebone black SDk sysroot for both ARM and x86 as supports Qt6, openssl and etc.
+├── sdk/                   # Custom Beaglebone black SDk sysroot for both ARM and x86 as supports Qt6, openssl and etc.
 ├── cmake/                 # User defined cmake includes.
 │   scripts/               # Scripts for setting project environment.
 ├── tools/                 # Development tools for development process i.e. linters, and formaters (i.e. LLVM clang flavours).
