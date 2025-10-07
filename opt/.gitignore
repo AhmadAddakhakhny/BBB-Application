@@ -1,0 +1,9 @@
+# Ignore all generated SDK files
+# sysroots
+*
+
+# Keep these scripts and this file
+!.gitignore
+!install-sdk.sh
+!environment-setup.sh
+!README.md
