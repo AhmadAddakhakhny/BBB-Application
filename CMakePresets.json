@@ -58,12 +58,12 @@
       "description": "Cross-compile for ARM using toolchain file",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/builds/arm-release",
-      "toolchainFile": "cmake/toolchains/beaglebone-armv7.cmake",
+      "toolchainFile": "cmake/toolchain-arm.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/arm-release",
         "WARNINGS_DISABLED": "OFF",
-        "LTO_ENABLED": "ON"
+        "LTO_ENABLED": "OFF"
       }
     }
   ],
