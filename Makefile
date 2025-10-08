@@ -9,9 +9,12 @@ host:
 	@echo "##### Build for host-debug Done."
 
 arm:
-	cmake --preset arm-linux-gcc-release
-	cmake --build --preset arm-linux-gcc-release -j
-	@echo "##### Build for target-release Done."
+	@bash -c '\
+		source ./scripts/dev/source-arm-env.sh && \
+		cmake --preset arm-linux-gcc-release && \
+		cmake --build --preset arm-linux-gcc-release -j && \
+		echo "##### Build for target-release Done." \
+	'
 
 test:
 	mkdir -p builds/x86/debug-tests/external
