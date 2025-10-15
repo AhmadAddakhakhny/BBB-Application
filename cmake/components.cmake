@@ -1,1 +1,1 @@
-set (COMPONENTS "LEDController")
+set (AVAILABLE_COMPONENTS "LEDController")
