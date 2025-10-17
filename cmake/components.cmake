@@ -1,1 +1,4 @@
-set (AVAILABLE_COMPONENTS "LEDController")
+set (AVAILABLE_COMPONENTS 
+    appDemo 
+    LEDController
+)
