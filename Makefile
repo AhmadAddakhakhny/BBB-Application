@@ -21,6 +21,7 @@ endif
 # Root of the project
 SRC_DIR := $(CURDIR)
 BUILD_DIR := $(SRC_DIR)/builds/$(ARCH)/debug
+INSTALL_DIR := $(SRC_DIR)/install
 
 # Function to compute the build directory for a component
 define build_subdir
@@ -45,7 +46,7 @@ ifeq ($(COMPONENT),all)
 	    cmake --preset $(PRESET) -DBUILD_COMPONENT=$$c -DBUILD_SOURCES=ON -B $(call build_subdir,$$c); \
 	done
 else
-	# @TBD: Validate the component first
+# @TBD: Validate the component first
 	@echo "=== Configuring component $(COMPONENT) ($(ARCH)) ==="
 	@mkdir -p $(call build_subdir,$(COMPONENT))
 	@cmake --preset $(PRESET) -DBUILD_COMPONENT=$(COMPONENT) -DBUILD_SOURCES=ON -B $(call build_subdir,$(COMPONENT))
@@ -59,11 +60,16 @@ build:
 ifeq ($(COMPONENT),all)
 	@echo "=== Building all components ($(ARCH)) ==="
 	@for c in $(AVAILABLE_COMPONENTS); do \
+	    echo ">>> Building $$c"; \
 	    cmake --build $(call build_subdir,$$c) --target $$c; \
+	    echo ">>> Installing $$c"; \
+	    cmake --install $(call build_subdir,$$c) --prefix $(SRC_DIR)/install/$(ARCH)/debug; \
 	done
 else
 	@echo "=== Building component $(COMPONENT) ($(ARCH)) ==="
 	@cmake --build $(call build_subdir,$(COMPONENT)) --target $(COMPONENT)
+	@echo ">>> Installing $(COMPONENT)"
+	@cmake --install $(call build_subdir,$(COMPONENT)) --prefix $(SRC_DIR)/install/$(ARCH)/debug
 endif
 
 # ==========================
@@ -93,8 +99,10 @@ clean:
 ifeq ($(COMPONENT),all)
 	@echo "=== Cleaning all build directories ==="
 	@rm -rf $(BUILD_DIR)/*
+	@rm -rf $(INSTALL_DIR)/*
 else
-	# @TBD: Validate the component first
+# @TBD: Validate the component first
 	@echo "=== Cleaning build directory for component $(COMPONENT) ==="
 	@rm -rf $(BUILD_DIR)/$(COMPONENT)
+	@rm -rf $(INSTALL_DIR)/$(ARCH)/debug/bin/$(COMPONENT)
 endif
