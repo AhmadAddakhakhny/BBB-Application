@@ -18,10 +18,15 @@ else
     $(error Unsupported ARCH=$(ARCH). Use arm or x86)
 endif
 
+# Default configure flags
+CONFIGURE_FLAGS := -DBUILD_SOURCES=ON -DBUILD_TESTING=OFF
+
 # Root of the project
 SRC_DIR := $(CURDIR)
 BUILD_DIR := $(SRC_DIR)/builds/$(ARCH)/debug
 INSTALL_DIR := $(SRC_DIR)/install
+INSTALL_PREFIX := $(INSTALL_DIR)/$(ARCH)/debug
+CONAN_DIR := $(SRC_DIR)/external
 
 # Function to compute the build directory for a component
 define build_subdir
@@ -62,22 +67,32 @@ ifeq ($(COMPONENT),all)
 	@for c in $(AVAILABLE_COMPONENTS); do \
 	    echo ">>> Building $$c"; \
 	    cmake --build $(call build_subdir,$$c) --target $$c; \
-	    echo ">>> Installing $$c"; \
-	    cmake --install $(call build_subdir,$$c) --prefix $(SRC_DIR)/install/$(ARCH)/debug; \
+		if [ "$(BUILD_TESTING)" != "ON" ]; then \
+	        echo ">>> Installing $$c"; \
+	        cmake --install $(call build_subdir,$$c) --prefix $(INSTALL_PREFIX); \
+	    fi; \
 	done
 else
 	@echo "=== Building component $(COMPONENT) ($(ARCH)) ==="
 	@cmake --build $(call build_subdir,$(COMPONENT)) --target $(COMPONENT)
-	@echo ">>> Installing $(COMPONENT)"
-	@cmake --install $(call build_subdir,$(COMPONENT)) --prefix $(SRC_DIR)/install/$(ARCH)/debug
+	if [ "$(BUILD_TESTING)" != "ON" ]; then \
+	    echo ">>> Installing $(COMPONENT)"; \
+	    cmake --install $(call build_subdir,$(COMPONENT)) --prefix $(INSTALL_PREFIX); \
+	fi
 endif
 
 # ==========================
 # Unit tests
 # ==========================
+.PHONY: conan-dependancy
+conan-dependancy:
+	@mkdir -p $(CONAN_DIR)
+	@cd $(CONAN_DIR) && conan install ../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
+
+
 .PHONY: test
-test: BUILD_TESTING := ON
-test: configure build run-tests
+test: CONFIGURE_FLAGS := -DBUILD_SOURCES=OFF -DBUILD_TESTING=ON
+test: conan-dependancy configure build run-tests
 
 .PHONY: run-tests
 run-tests:
@@ -98,7 +113,7 @@ endif
 clean:
 ifeq ($(COMPONENT),all)
 	@echo "=== Cleaning all build directories ==="
-	@rm -rf $(BUILD_DIR)/*
+	@rm -rf $(SRC_DIR)/builds/*
 	@rm -rf $(INSTALL_DIR)/*
 else
 # @TBD: Validate the component first

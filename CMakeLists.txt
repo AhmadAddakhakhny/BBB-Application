@@ -74,7 +74,7 @@ endif()
 if (BUILD_TESTING)
     # 1. Get dependancies Conan’s CMakeDeps
     message (STATUS "Conan running to install project dependancies")
-    include (${CMAKE_BINARY_DIR}/external/conan_toolchain.cmake)
+    include (${CMAKE_SOURCE_DIR}/external/conan_toolchain.cmake)
     find_package (GTest REQUIRED)
     include (CTest)
 

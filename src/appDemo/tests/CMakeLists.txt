@@ -13,7 +13,7 @@ enable_testing()
 gtest_discover_tests(${APP_TEST} DISCOVERY_MODE PRE_TEST)
 
 # --- Coverage Configuration ---
-set(COVERAGE_MAIN "coverage")
+set(COVERAGE_MAIN "coverage__${APP_TEST}")
 set(COVERAGE_EXCLUDES
     "${PROJECT_SOURCE_DIR}/builds/*"
     "${PROJECT_SOURCE_DIR}/cmake/*"
