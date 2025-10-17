@@ -1,0 +1,8 @@
+#ifndef CONFIG_HPP_IN
+#define CONFIG_HPP_IN
+#include<string_view>
+
+static constexpr std::string_view project_name = "@DEMO_APP_NAME@";
+static constexpr std::string_view app_git_commit_sha = "@GIT_COMMIT_SHA@";
+
+#endif
