@@ -1,5 +1,5 @@
 function (target_set_warnings _target)
-    if (NOT WARNINGS_DISABLED)
+    if (WARNINGS_ENABLED)
         set (WARNINGS_FLAGS -Wall -Wextra -Wpedantic)
         set (WARNINGS ${WARNINGS_FLAGS} -Werror)
         target_compile_options (${_target} PRIVATE ${WARNINGS})

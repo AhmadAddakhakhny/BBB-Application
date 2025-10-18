@@ -19,7 +19,7 @@ if (NOT DEFINED CMAKE_INSTALL_SYSTEMD_UNITDIR)
 endif()
 
 
-option (WARNINGS_DISABLED OFF "Disable Compiler Warnings")
+option (WARNINGS_ENABLED OFF "Disable Compiler Warnings")
 option (BUILD_SOURCES OFF "Build application components")
 option (BUILD_TESTING OFF "Build application components unit tests")
 option (ADDRESS_SANITIZER_ENABLED OFF "Build with sanitizer")
