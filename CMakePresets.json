@@ -12,10 +12,20 @@
       "displayName": "x86_64 Debug (Native Linux Machine)",
       "description": "Build for host with Debug flags",
       "generator": "Unix Makefiles",
-      "binaryDir": "${sourceDir}/builds/x86/debug/",
       "cacheVariables": {
+        "BUILD_SOURCES": "ON",
+        "WARNINGS_ENABLED": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x86-linux-gcc-debug-tests",
+      "displayName": "x86_64 Debug-test (Native Linux Machine)",
+      "cacheVariables": {
+        "BUILD_TESTING": "ON",
+        "WARNINGS_ENABLED": "ON",
         "CMAKE_BUILD_TYPE": "Debug",
-        "WARNINGS_ENABLED": "ON"
+        "ADDRESS_SANITIZER_ENABLED": "ON"
       }
     },
     {
@@ -23,9 +33,9 @@
       "displayName": "ARMv7 Debug (BeagleBone Black)",
       "description": "Cross-compile for ARM using toolchain file",
       "generator": "Unix Makefiles",
-      "binaryDir": "${sourceDir}/builds/arm/debug",
       "toolchainFile": "cmake/toolchain-arm.cmake",
       "cacheVariables": {
+        "BUILD_SOURCES": "ON",
         "CMAKE_BUILD_TYPE": "Debug",
         "WARNINGS_ENABLED": "ON"
       }
@@ -35,9 +45,9 @@
       "displayName": "ARMv7 Release (BeagleBone Black)",
       "description": "Cross-compile for ARM using toolchain file",
       "generator": "Unix Makefiles",
-      "binaryDir": "${sourceDir}/builds/arm/release",
       "toolchainFile": "cmake/toolchain-arm.cmake",
       "cacheVariables": {
+        "BUILD_SOURCES": "ON",
         "CMAKE_BUILD_TYPE": "Release",
         "WARNINGS_ENABLED": "ON"
       }
@@ -56,6 +66,23 @@
     {
       "name": "arm-linux-gcc-release",
       "configurePreset": "arm-linux-gcc-release"
+    },
+    {
+      "name": "x86-linux-gcc-debug-tests",
+      "configurePreset": "x86-linux-gcc-debug-tests"
+    }
+  ],
+
+  "testPresets": [
+    {
+      "name": "x86-linux-gcc-debug-tests",
+      "description": "Run GoogleTest-based tests via CTest on the native host",
+      "configurePreset": "x86-linux-gcc-debug-tests",
+      "output": {
+        "shortProgress": true,
+        "outputOnFailure": true,
+        "verbosity": "default"
+      }
     }
   ]
 }

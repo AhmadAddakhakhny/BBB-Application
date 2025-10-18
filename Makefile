@@ -6,14 +6,38 @@
 include cmake/components.min
 
 # Default architecture
-ARCH ?= arm
+ARCH ?= x86
 # Default to build all components if COMPONENT is not specified
 COMPONENT ?= all
-# Map ARCH to CMake preset
+# Project build type
+BUILD-TYPE ?= debug
+
+
+# Depict build target based upon ARCH, BUILD-TYPE to CMake preset
+ifeq ($(filter test,$(MAKECMDGOALS)),test)	# Detect if running tests
+    TEST_MODE := 1
+else
+    TEST_MODE := 0
+endif
+
 ifeq ($(ARCH),arm)
-    PRESET := x86-linux-gcc-debug
+	ifeq ($(BUILD-TYPE),debug)
+    	PRESET := arm-linux-gcc-debug
+	else ifeq ($(ARCH),x86)
+		PRESET := arm-linux-gcc-release
+	else
+		$(error Unsupported BUILD-TYPE=$(BUILD-TYPE). Use debug or release!)
+	endif
 else ifeq ($(ARCH),x86)
-    PRESET := x86-linux-gcc-debug
+	ifeq ($(BUILD-TYPE),debug)
+		ifeq ($(TEST_MODE),1)
+			PRESET := x86-linux-gcc-debug-tests
+		else
+    		PRESET := x86-linux-gcc-debug
+		endif
+	else
+		$(error Unsupported BUILD-TYPE=$(BUILD-TYPE). Use debug!)
+	endif
 else
     $(error Unsupported ARCH=$(ARCH). Use arm or x86)
 endif
@@ -30,7 +54,7 @@ CONAN_DIR := $(SRC_DIR)/external
 
 # Function to compute the build directory for a component
 define build_subdir
-$(BUILD_DIR)/$1
+$(if $(filter 1,$(TEST_MODE)),$(BUILD_DIR)/tests/$1,$(BUILD_DIR)/$1)
 endef
 
 # ==========================
