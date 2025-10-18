@@ -13,7 +13,7 @@ COMPONENT ?= all
 BUILD-TYPE ?= debug
 
 
-# Depict build target based upon ARCH, BUILD-TYPE to CMake preset
+# Depict build target based upon ARCH, BUILD-TYPE and TEST to CMake preset
 ifeq ($(filter test,$(MAKECMDGOALS)),test)	# Detect if running tests
     TEST_MODE := 1
 else
@@ -42,9 +42,6 @@ else
     $(error Unsupported ARCH=$(ARCH). Use arm or x86)
 endif
 
-# Default configure flags
-CONFIGURE_FLAGS := -DBUILD_SOURCES=ON -DBUILD_TESTING=OFF
-
 # Root of the project
 SRC_DIR := $(CURDIR)
 BUILD_DIR := $(SRC_DIR)/builds/$(ARCH)/debug
@@ -72,13 +69,13 @@ ifeq ($(COMPONENT),all)
 	@echo "=== Configuring all components ($(ARCH)) ==="
 	@for c in $(AVAILABLE_COMPONENTS); do \
 	    mkdir -p $(call build_subdir,$$c); \
-	    cmake --preset $(PRESET) -DBUILD_COMPONENT=$$c -DBUILD_SOURCES=ON -B $(call build_subdir,$$c); \
+	    cmake --preset $(PRESET) -DBUILD_COMPONENT=$$c -B $(call build_subdir,$$c); \
 	done
 else
 # @TBD: Validate the component first
 	@echo "=== Configuring component $(COMPONENT) ($(ARCH)) ==="
 	@mkdir -p $(call build_subdir,$(COMPONENT))
-	@cmake --preset $(PRESET) -DBUILD_COMPONENT=$(COMPONENT) -DBUILD_SOURCES=ON -B $(call build_subdir,$(COMPONENT))
+	@cmake --preset $(PRESET) -DBUILD_COMPONENT=$(COMPONENT) -B $(call build_subdir,$(COMPONENT))
 endif
 
 # ==========================
@@ -90,17 +87,19 @@ ifeq ($(COMPONENT),all)
 	@echo "=== Building all components ($(ARCH)) ==="
 	@for c in $(AVAILABLE_COMPONENTS); do \
 	    echo ">>> Building $$c"; \
-	    cmake --build $(call build_subdir,$$c) --target $$c; \
-		if [ "$(BUILD_TESTING)" != "ON" ]; then \
-	        echo ">>> Installing $$c"; \
+	    if [ "$(TEST_MODE)" = "1" ]; then \
+	        cmake --build $(call build_subdir,$$c); \
+	    else \
+	        cmake --build $(call build_subdir,$$c) --target $$c; \
 	        cmake --install $(call build_subdir,$$c) --prefix $(INSTALL_PREFIX); \
 	    fi; \
 	done
 else
 	@echo "=== Building component $(COMPONENT) ($(ARCH)) ==="
-	@cmake --build $(call build_subdir,$(COMPONENT)) --target $(COMPONENT)
-	if [ "$(BUILD_TESTING)" != "ON" ]; then \
-	    echo ">>> Installing $(COMPONENT)"; \
+	@if [ "$(TEST_MODE)" = "1" ]; then \
+	    cmake --build $(call build_subdir,$(COMPONENT)); \
+	else \
+	    cmake --build $(call build_subdir,$(COMPONENT)) --target $(COMPONENT); \
 	    cmake --install $(call build_subdir,$(COMPONENT)) --prefix $(INSTALL_PREFIX); \
 	fi
 endif
@@ -108,15 +107,13 @@ endif
 # ==========================
 # Unit tests
 # ==========================
-.PHONY: conan-dependancy
-conan-dependancy:
+.PHONY: test
+test: prep-test-dependency configure build run-tests
+
+.PHONY: prep-test-dependency
+prep-test-dependency:
 	@mkdir -p $(CONAN_DIR)
 	@cd $(CONAN_DIR) && conan install ../tools -s build_type=Debug --output-folder=. --build missing -s compiler.cppstd=17
-
-
-.PHONY: test
-test: CONFIGURE_FLAGS := -DBUILD_SOURCES=OFF -DBUILD_TESTING=ON
-test: conan-dependancy configure build run-tests
 
 .PHONY: run-tests
 run-tests:
