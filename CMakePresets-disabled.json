@@ -1,0 +1,111 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+
+  "configurePresets": [
+    {
+      "name": "x86-linux-gcc-debug",
+      "displayName": "x86_64 Debug (Native Linux Machine)",
+      "description": "Build for host with Debug flags",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/builds/x86/debug/",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "WARNINGS_DISABLED": "OFF",
+        "LTO_ENABLED": "ON"
+      }
+    },
+    {
+      "name": "x86-linux-gcc-debug-nolto",
+      "displayName": "x86_64 Debug-nolto (Native Linux Machine)",
+      "description": "Build for host with Debug flags",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86/debug-lint",
+      "cacheVariables": {
+        "LTO_ENABLED": "OFF",
+        "CLANG_TIDY_ENABLED": "ON"
+      }
+    },
+      {
+      "name": "x86-linux-gcc-debug-format",
+      "displayName": "x86_64 Debug-format (Native Linux Machine)",
+      "description": "Build for host with Debug flags",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86/debug-format",
+      "cacheVariables": {
+        "FORMAT_ENABLED": "ON"
+      }
+    },
+    {
+      "name": "x86-linux-gcc-tests",
+      "displayName": "x86_64 Debug-test (Native Linux Machine)",
+      "inherits": "x86-linux-gcc-debug",
+      "binaryDir": "${sourceDir}/builds/x86/debug-tests",
+      "cacheVariables": {
+        "BUILD_TESTING": "ON",
+        "ADDRESS_SANITIZER_ENABLED": "ON",
+        "WARNINGS_DISABLED": "OFF",
+        "LTO_ENABLED": "OFF"
+      }
+    },
+    {
+      "name": "arm-linux-gcc-release",
+      "displayName": "ARMv7 Release (BeagleBone Black)",
+      "description": "Cross-compile for ARM using toolchain file",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/builds/arm-release",
+      "toolchainFile": "cmake/toolchain-arm.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/arm-release",
+        "WARNINGS_DISABLED": "OFF",
+        "LTO_ENABLED": "OFF"
+      }
+    }
+  ],
+
+  "buildPresets": [
+    {
+      "name": "x86-linux-gcc-debug",
+      "configurePreset": "x86-linux-gcc-debug"
+    },
+    {
+      "name": "x86-linux-gcc-debug-lint",
+      "displayName": "Run clang-tidy (no LTO)",
+      "configurePreset": "x86-linux-gcc-debug-nolto",
+      "targets": ["LEDController_clangtidy"],
+      "jobs": 4
+    },
+    {
+      "name": "x86-linux-gcc-debug-format",
+      "displayName": "Run clang-format & cmake-format",
+      "configurePreset": "x86-linux-gcc-debug-format",
+      "jobs": 4
+    },
+    {
+      "name": "x86-linux-gcc-tests",
+      "configurePreset": "x86-linux-gcc-tests"
+    },
+    {
+      "name": "arm-linux-gcc-release",
+      "configurePreset": "arm-linux-gcc-release"
+    }
+  ],
+
+   "testPresets": [
+    {
+      "name": "x86-linux-gcc-tests",
+      "description": "Run GoogleTest-based tests via CTest on the native host",
+      "configurePreset": "x86-linux-gcc-tests",
+      "output": {
+        "shortProgress": true,
+        "outputOnFailure": true,
+        "verbosity": "default"
+      }
+    }
+  ]
+}
