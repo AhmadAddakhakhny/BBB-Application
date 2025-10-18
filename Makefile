@@ -12,7 +12,6 @@ COMPONENT ?= all
 # Project build type
 BUILD-TYPE ?= debug
 
-
 # Depict build target based upon ARCH, BUILD-TYPE and TEST to CMake preset
 ifeq ($(filter test,$(MAKECMDGOALS)),test)	# Detect if running tests
     TEST_MODE := 1
@@ -23,7 +22,7 @@ endif
 ifeq ($(ARCH),arm)
 	ifeq ($(BUILD-TYPE),debug)
     	PRESET := arm-linux-gcc-debug
-	else ifeq ($(ARCH),x86)
+	else ifeq ($(BUILD-TYPE),release)
 		PRESET := arm-linux-gcc-release
 	else
 		$(error Unsupported BUILD-TYPE=$(BUILD-TYPE). Use debug or release!)
@@ -44,9 +43,9 @@ endif
 
 # Root of the project
 SRC_DIR := $(CURDIR)
-BUILD_DIR := $(SRC_DIR)/builds/$(ARCH)/debug
+BUILD_DIR := $(SRC_DIR)/builds/$(ARCH)/$(BUILD-TYPE)
 INSTALL_DIR := $(SRC_DIR)/install
-INSTALL_PREFIX := $(INSTALL_DIR)/$(ARCH)/debug
+INSTALL_PREFIX := $(INSTALL_DIR)/$(ARCH)/$(BUILD-TYPE)
 CONAN_DIR := $(SRC_DIR)/external
 
 # Function to compute the build directory for a component
